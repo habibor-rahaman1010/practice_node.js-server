@@ -1,0 +1,16 @@
+{
+  "name": "practice_node_server",
+  "version": "1.0.0",
+  "description": "This is my node server.",
+  "main": "Application/index.js",
+  "scripts": {
+    "start": "Application/index.js",
+    "start-dev": "nodemon Application/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Habibor Rahaman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
