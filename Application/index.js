@@ -1,8 +1,17 @@
 const express = require('express');
 const myData = require('../Data/data');
-const myBlogs = require('../Data/blogs')
+const myBlogs = require('../Data/blogs');
+const cors = require('cors');
+const bodyParser = require('body-parser')
 const app = express();
 const port = 5000;
+
+//This is my middleware
+app.use(cors());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+// parse application/json
+app.use(bodyParser.json())
 
 //-------------------------------------------------here is my all user database api---------------------------------------------------------
 //this is my root api, method: GET
@@ -13,6 +22,22 @@ app.get('/', (req, res) => {
 //this api provide all user, method: GET
 app.get('/all_users', (req, res) => {
     res.send(myData);
+});
+
+//this is my post pai
+app.post('/all_users', (req, res) => {
+    const allChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let storPass = "";
+    for (let i = 0; i < 30; i++) {
+        const gp = Math.random() * allChar.length;
+        storPass += allChar.substring(gp, gp + 1);
+    };
+
+    const newUser = req.body;
+    newUser._id = storPass;
+    myData.push(newUser);
+    res.send(JSON.stringify(newUser));
+    // res.json(newUser);
 });
 
 //this api provide unic user given. method: GET
